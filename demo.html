@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- TDK 优化 -->
+    <title>Insuraim – 口袋理财顾问｜智能保单管理与保险体检平台</title>
+    <meta name="description" content="Insuraim 是您的口袋理财顾问，帮助您集中管理个人与家庭保单。通过 AI 自动识别保单条款，生成保险体检报告，评估保障缺口，并提供中立的配置建议。支持电子保单上传、拍照识别及智能问答，未来将拓展至基金、股票等资产分析，为中产与高净值用户提供一站式保障与财富管理视图。">
+    <meta name="keywords" content="智能保单管理, 保单体检, 口袋理财顾问, AI 保险分析, 保单管家, 香港保险, 家庭保障规划, 保险知识, Insuraim">
+    
+    <!-- Open Graph 社交媒体分享 -->
+    <meta property="og:title" content="Insuraim – 您的口袋理财顾问，智能保单管家">
+    <meta property="og:description" content="一站管理全家保单，用 AI 看懂保险条款，做全面保障体检，未来延伸至基金与投资组合分析。">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="zh_CN">
+    
+    <!-- 样式 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* 全局样式 */
+        :root {
+            --primary-color: #1e5af5;      /* 主蓝色 - 专业可信 */
+            --secondary-color: #00c3a5;    /* 绿色 - 科技感 */
+            --dark-color: #0a174e;         /* 深蓝 - 稳重 */
+            --light-color: #f8fafc;        /* 浅色背景 */
+            --text-color: #2d3748;         /* 主要文字 */
+            --text-light: #718096;         /* 次要文字 */
+            --white: #ffffff;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* 容器 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 按钮样式 */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: #0d4cdc;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        /* 导航栏 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            padding: 20px 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--dark-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo span {
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 8px 0;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Hero 区域 */
+        .hero {
+            padding: 180px 0 100px;
+            background: linear-gradient(135deg, #f8fafc 0%, #e6f0ff 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-tagline {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: rgba(30, 90, 245, 0.1);
+            color: var(--primary-color);
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .hero-title {
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--dark-color) 0%, var(--primary-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: var(--text-light);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+        }
+
+        /* 痛点描述区域 */
+        .pain-points {
+            padding: 100px 0;
+            background-color: var(--white);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 60px;
+            color: var(--dark-color);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 18px;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto 60px;
+        }
+
+        .pain-points-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .pain-point-card {
+            background: var(--white);
+            padding: 40px 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid #e2e8f0;
+        }
+
+        .pain-point-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .pain-icon {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(30, 90, 245, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            color: var(--primary-color);
+            font-size: 24px;
+        }
+
+        .pain-point-card h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--dark-color);
+        }
+
+        .pain-point-card p {
+            color: var(--text-light);
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        /* 功能区域 */
+        .features {
+            padding: 100px 0;
+            background-color: var(--light-color);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 40px 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            color: var(--white);
+            font-size: 28px;
+        }
+
+        .feature-card h3 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--dark-color);
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        /* 工作流程区域 */
+        .workflow {
+            padding: 100px 0;
+            background-color: var(--white);
+        }
+
+        .workflow-steps {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 30px;
+            margin-top: 60px;
+            position: relative;
+        }
+
+        .workflow-steps::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 100px;
+            right: 100px;
+            height: 2px;
+            background-color: #e2e8f0;
+            z-index: 1;
+        }
+
+        .step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: var(--white);
+            border: 3px solid var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 0 auto 24px;
+        }
+
+        .step h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--dark-color);
+        }
+
+        .step p {
+            color: var(--text-light);
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        /* 信任与安全区域 */
+        .trust {
+            padding: 100px 0;
+            background-color: var(--light-color);
+        }
+
+        .trust-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .trust-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .trust-point {
+            text-align: center;
+        }
+
+        .trust-point i {
+            font-size: 36px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .trust-point h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--dark-color);
+        }
+
+        .trust-point p {
+            color: var(--text-light);
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        /* 愿景区域 */
+        .vision {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--dark-color) 0%, #1a237e 100%);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .vision-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .vision-subtitle {
+            font-size: 18px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .timeline {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 60px;
+        }
+
+        .timeline-item {
+            flex: 1;
+            min-width: 250px;
+            text-align: left;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .timeline-year {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin-bottom: 12px;
+        }
+
+        .timeline-desc {
+            font-size: 15px;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        /* CTA 区域 */
+        .cta-section {
+            padding: 100px 0;
+            background-color: var(--white);
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--dark-color);
+        }
+
+        .cta-subtitle {
+            font-size: 18px;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* 页脚 */
+        footer {
+            background-color: var(--dark-color);
+            color: var(--white);
+            padding: 80px 0 40px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-logo span {
+            color: var(--secondary-color);
+        }
+
+        .footer-about {
+            opacity: 0.8;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .footer-links h4 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary-color);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 14px;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 36px;
+            }
+            
+            .hero-subtitle {
+                font-size: 18px;
+            }
+            
+            .section-title {
+                font-size: 28px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-buttons,
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .workflow-steps {
+                flex-direction: column;
+                gap: 40px;
+            }
+            
+            .workflow-steps::before {
+                display: none;
+            }
+            
+            .step {
+                max-width: 300px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 28px;
+            }
+            
+            .hero-subtitle {
+                font-size: 16px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+    
+    <!-- Font Awesome 图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <span>Insuraim</span>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="#features" class="nav-link">产品功能</a></li>
+                <li><a href="#workflow" class="nav-link">如何运作</a></li>
+                <li><a href="#trust" class="nav-link">安全合规</a></li>
+                <li><a href="#vision" class="nav-link">未来愿景</a></li>
+                <li><a href="#cta" class="nav-link">立即体验</a></li>
+            </ul>
+            
+            <a href="#cta" class="btn btn-primary">申请内测</a>
+        </div>
+    </nav>
+
+    <!-- Hero 区域 -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-tagline">口袋理财顾问 + 智能保单管家</div>
+                <h1 class="hero-title">Insuraim – 您的口袋理财顾问</h1>
+                <p class="hero-subtitle">
+                    一站管理全家保单，用 AI 看懂复杂条款，做一次真正有用的保险体检。
+                    未来将拓展至基金、股票等资产分析，为您提供完整的财富管理视图。
+                </p>
+                
+                <div class="hero-buttons">
+                    <a href="#cta" class="btn btn-primary">
+                        <i class="fas fa-rocket"></i> 申请内测
+                    </a>
+                    <a href="#" class="btn btn-secondary">
+                        <i class="fas fa-envelope"></i> 订阅产品更新
+                    </a>
+                </div>
+                
+                <!-- 产品概念图占位 -->
+                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+                         width: 80%; max-width: 600px; height: 300px; margin: 0 auto; 
+                         border-radius: 20px; position: relative; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.2);">
+                    <div style="position: absolute; top: 20px; left: 20px; right: 20px; bottom: 20px; background: rgba(255,255,255,0.1); border-radius: 12px; 
+                            display: flex; align-items: center; justify-content: center; color: white; font-size: 18px; font-weight: 600;">
+                        产品概念图：AI 保险分析报告 + 聊天助手界面
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 痛点描述区域 -->
+    <section class="pain-points">
+        <div class="container">
+            <h2 class="section-title">保险这件事，为什么总让人头大？</h2>
+            <p class="section-subtitle">我们理解您在保险管理过程中遇到的种种困扰</p>
+            
+            <div class="pain-points-grid">
+                <div class="pain-point-card">
+                    <div class="pain-icon">
+                        <i class="fas fa-file-contract"></i>
+                    </div>
+                    <h3>合同一堆，看不懂</h3>
+                    <p>条款又长又难懂，专业术语让人眼花缭乱，一遇到理赔或续保就心慌。</p>
+                </div>
+                
+                <div class="pain-point-card">
+                    <div class="pain-icon">
+                        <i class="fas fa-folder-open"></i>
+                    </div>
+                    <h3>保单分散，容易忘</h3>
+                    <p>微信、邮箱、纸质文件一大堆，关键时候总是找不到需要的保单。</p>
+                </div>
+                
+                <div class="pain-point-card">
+                    <div class="pain-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>保障到底够不够？</h3>
+                    <p>买了几份保险，却不知道是不是重复覆盖，还是存在重大保障缺口。</p>
+                </div>
+                
+                <div class="pain-point-card">
+                    <div class="pain-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3>想问顾问，又怕被带节奏</h3>
+                    <p>既想听专业意见，又担心被推销复杂、不适合自己的产品，陷入两难。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 功能区域 -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Insuraim 帮你，把复杂变简单</h2>
+            <p class="section-subtitle">四大核心功能，重新定义保险管理体验</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-upload"></i>
+                    </div>
+                    <h3>智能保单管理</h3>
+                    <p>支持电子保单上传与拍照识别，自动识别保险公司、险种类型、保额、缴费年期等关键信息，让所有保单一目了然，有迹可循。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>AI 条款解读 & 智能问答</h3>
+                    <p>面对专业术语，直接问：「这条免责是什么意思？」「可以中途退保吗？」AI 基于保单原文与知识库，为您生成通俗易懂的解释和建议。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-stethoscope"></i>
+                    </div>
+                    <h3>家庭保障体检与评分</h3>
+                    <p>从寿险、重疾、医疗、意外等多维度评估保障情况，形成专属体检报告，指出保障过高/过低/缺失的地方，让您心中有数。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>迈向完整的财富视图</h3>
+                    <p>未来支持基金、股票等持仓导入，对您的资产组合进行风险收益分析，帮助构建适合自己的财富地图，真正成为您的口袋理财顾问。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 工作流程区域 -->
+    <section id="workflow" class="workflow">
+        <div class="container">
+            <h2 class="section-title">3 步，做一次真正有用的保险体检</h2>
+            <p class="section-subtitle">简单高效，立即开始您的保险优化之旅</p>
+            
+            <div class="workflow-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>上传保单</h3>
+                    <p>支持 PDF 上传或拍照识别，不限保险公司、不限险种类型，轻松导入所有保单。</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>AI 自动解析条款</h3>
+                    <p>Insuraim AI 自动读取保单，识别关键条款并生成简明的保单摘要与关键提示。</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>获取体检报告 & 提问</h3>
+                    <p>查看完整的保障体检报告，随时向 AI 提问，获得针对性的解读与优化建议。</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 60px; opacity: 0.7; font-style: italic;">
+                <p>Step 4 – 「如有需要，连接专业顾问」– 即将上线</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 信任与安全区域 -->
+    <section id="trust" class="trust">
+        <div class="container">
+            <div class="trust-content">
+                <h2 class="section-title">安全，是一切服务的前提</h2>
+                <p class="section-subtitle">我们深知保险数据的敏感性，因此将安全合规置于首位</p>
+                
+                <div class="trust-points">
+                    <div class="trust-point">
+                        <i class="fas fa-lock"></i>
+                        <h3>银行级加密技术</h3>
+                        <p>您的保单数据采用银行级加密存储与传输，确保绝对安全。</p>
+                    </div>
+                    
+                    <div class="trust-point">
+                        <i class="fas fa-user-shield"></i>
+                        <h3>严格的数据隐私</h3>
+                        <p>您的个人信息仅用于为您提供服务，绝不会未经授权分享给任何第三方。</p>
+                    </div>
+                    
+                    <div class="trust-point">
+                        <i class="fas fa-balance-scale"></i>
+                        <h3>中立客观的立场</h3>
+                        <p>Insuraim 不作为保险销售方，不站队任何保险公司，只为您的决策提供清晰、客观的信息支持。</p>
+                    </div>
+                    
+                    <div class="trust-point">
+                        <i class="fas fa-certificate"></i>
+                        <h3>持续合规审查</h3>
+                        <p>我们持续通过行业认证与合规审查，确保平台在数据与业务层面都符合所在地区要求。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 愿景区域 -->
+    <section id="vision" class="vision">
+        <div class="container">
+            <h2 class="vision-title">从看懂一份保单，走向看懂一生的财务规划</h2>
+            <p class="vision-subtitle">今天，Insuraim 从帮您看懂一份保单开始；明天，我们希望成为您口袋里的长期理财顾问</p>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year">2024 - 2025</div>
+                    <div class="timeline-desc">
+                        智能保单解析与体检<br>
+                        覆盖香港/内地主流保险公司<br>
+                        基础 AI 问答与报告生成
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">2025 - 2026</div>
+                    <div class="timeline-desc">
+                        保险财务需求分析<br>
+                        顾问智能匹配系统<br>
+                        家庭保障优化建议
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">2026 - 2027</div>
+                    <div class="timeline-desc">
+                        基金/股票持仓分析<br>
+                        完整资产视图整合<br>
+                        智能财富管理规划
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA 区域 -->
+    <section id="cta" class="cta-section">
+        <div class="container">
+            <h2 class="cta-title">开启您的保险数字化之旅</h2>
+            <p class="cta-subtitle">
+                想知道自己的保障是否合理？<br>
+                3 分钟上传保单，让 Insuraim 帮您做一次免费的保险体检。
+            </p>
+            
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-primary" style="padding: 16px 40px; font-size: 18px;">
+                    <i class="fas fa-user-plus"></i> 申请内测资格
+                </a>
+                <a href="mailto:contact@insuraim.com" class="btn btn-secondary" style="padding: 16px 40px; font-size: 18px;">
+                    <i class="fas fa-headset"></i> 联系我们咨询
+                </a>
+            </div>
+            
+            <p style="margin-top: 30px; color: var(--text-light); font-size: 14px;">
+                内测名额有限，优先向早期用户开放
+            </p>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <div class="footer-logo">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Insuraim</span>
+                    </div>
+                    <p class="footer-about">
+                        Insuraim 是您的口袋理财顾问，智能保单管家。
+                        我们致力于通过 AI 技术帮助用户集中管理保单、理解保险条款、优化保障配置。
+                    </p>
+                    
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-weixin"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>产品功能</h4>
+                    <ul>
+                        <li><a href="#features">智能保单管理</a></li>
+                        <li><a href="#features">AI 条款解读</a></li>
+                        <li><a href="#features">保障体检评分</a></li>
+                        <li><a href="#features">财富视图</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>公司信息</h4>
+                    <ul>
+                        <li><a href="#">关于我们</a></li>
+                        <li><a href="#">团队介绍</a></li>
+                        <li><a href="#">加入我们</a></li>
+                        <li><a href="#">媒体报道</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>法律与支持</h4>
+                    <ul>
+                        <li><a href="#">隐私政策</a></li>
+                        <li><a href="#">使用条款</a></li>
+                        <li><a href="#">免责声明</a></li>
+                        <li><a href="#">帮助中心</a></li>
+                        <li><a href="mailto:support@insuraim.com">support@insuraim.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2024 Insuraim. 保留所有权利。</p>
+                <p style="margin-top: 8px; font-size: 12px;">公司地址：香港 / 深圳 | 多语言支持：中文简体 / 繁体 / English</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 简单的平滑滚动脚本 -->
+    <script>
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.padding = '15px 0';
+                navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                navbar.style.padding = '20px 0';
+                navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            }
+        });
+        
+        // 简单的动画效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            // 观察所有需要动画的元素
+            document.querySelectorAll('.pain-point-card, .feature-card, .step').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
